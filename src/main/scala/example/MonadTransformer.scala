@@ -15,6 +15,7 @@ object MonadTransformer {
     } yield a + b
 
     println(res)
+    println(res.value)
   }
 
   def threeMonadTransform(): Unit = {
@@ -38,5 +39,7 @@ object MonadTransformer {
     } yield a + b + c
 
     println(res)
+    println(res.value)
+    println(res.value.value)
   }
 }
