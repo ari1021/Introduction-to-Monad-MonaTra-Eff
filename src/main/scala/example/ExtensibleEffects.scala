@@ -12,10 +12,13 @@ object ExtensibleEffects {
     val mb: Either[String, Int] = Right(2)
 
     type EitherString[A] = Either[String, A]
+    // declare effects that are used to run program
     type Stack = Fx.fx2[Option, EitherString]
 
     type _eitherString[R] = EitherString |= R
 
+    // "R: _option : _eitherString" is the constraint for program to use "option" and "eitherString" effects.
+    // program[R: _option : _eitherString] is equal to program[R](implicit o: _option[R])(implicit e: _eitherString[R])
     def program[R: _option : _eitherString]: Eff[R, Int] =
       for {
         a <- fromOption(ma)
